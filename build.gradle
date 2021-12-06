@@ -1,0 +1,25 @@
+tasks.register("mytask") {
+
+}
+
+//println "Root tasks:"
+//tasks.forEach { t -> println t.project.name + ":" + t.name }
+//println ""
+
+gradle.taskGraph.addTaskExecutionGraphListener({
+    TaskExecutionGraph graph ->
+//        println "Graph tasks:"
+//        graph.allTasks.forEach(t -> println t.project.name + ":" + t.name)
+//        println ""
+
+        def task = graph.allTasks.get(0)
+        assert task.project.name.equals("subproject")
+        assert tasks.stream().noneMatch(t-> t.project.name.equals("subproject"))
+        assert !tasks.contains(task);
+
+//        def rootTasks = graph.allTasks.findAll { el -> tasks.contains(el) }
+//        if (rootTasks.size() > 0) {
+//            println "root tasks detected: " + rootTasks
+//        } else
+//            println "No root tasks"
+})

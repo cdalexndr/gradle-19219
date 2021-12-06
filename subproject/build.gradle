@@ -1,0 +1,7 @@
+//println "Subproject tasks:"
+//tasks.forEach { t -> println t.project.name + ":" + t.name }
+//println ""
+
+tasks.register("mytask") {
+
+}
